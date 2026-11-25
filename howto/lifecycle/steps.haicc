@@ -1,0 +1,21 @@
+# step: deployed: its commission brought it into service (its initialise hooks, its info extracted; its start hooks, its door opened)
+. boot/deploy host haiccing/base-component-haicc
+# expect: "deployed":"host"
+# step: what is behind the door allowed
+host boot/deploy node-1 haiccing/base-package-runtime
+# expect: "deployed":"node-1"
+host boot/teardown node-1
+# expect: "tornDown":"node-1"
+# step: its door closed again: boot refused (not now) until the next start; its runtime runs on
+host service/stop
+# expect: "state":"initialised"
+host boot/deploy node-1 haiccing/base-package-runtime
+# expect: error: not now
+# step: back to booted
+host service/shutdown
+# expect: "state":"booted"
+# step: made ready and opened again
+host service/initialise
+# expect: "state":"initialised"
+host service/start
+# expect: "state":"started"

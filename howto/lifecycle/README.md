@@ -7,20 +7,7 @@ state and moves it on; its hooks do the work of the transition.
 
 ## Steps
 
-```sh
-# deployed: its commission brought it into service (its initialise hooks, its info extracted; its start hooks, its door opened)
-haicc . boot/deploy host haiccing/base-component-haicc
-# what is behind the door allowed
-haicc host boot/deploy node-1 haiccing/base-package-runtime
-haicc host boot/teardown node-1
-# its door closed again: boot refused (not now) until the next start; its runtime runs on
-haicc host service/stop
-# back to booted
-haicc host service/shutdown
-# made ready and opened again
-haicc host service/initialise
-haicc host service/start
-```
+The script, [steps.haicc](steps.haicc): each line as typed after `haicc`, what it answers under it; run with `howto/run`, shown here at info extraction.
 
 ## Notes
 
