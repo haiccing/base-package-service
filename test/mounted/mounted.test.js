@@ -43,8 +43,8 @@ function execution (state, hooks = brought) {
     // the rest of an execution context, standing in: a file that may not
     // be there, the log (kept: entries), a step run as it is
     find: async function (p) { try { return await this.read(p) } catch { return null } },
-    log: function (level, event, data = {}) { (this.entries ??= []).push({ level, event, ...data }) },
-    step: async function (event, data, fn, level = 'verbose') { const r = await fn(); (this.entries ??= []).push({ level, event, ...(typeof data === 'function' ? data(r) : data) }); return r },
+    log: function (level, event, line) { if (typeof line !== 'string') throw new Error('not a log entry: a line'); (this.entries ??= []).push({ level, event, line }) },
+    step: async function (event, line, fn, level = 'verbose') { const r = await fn(); (this.entries ??= []).push({ level, event, line: typeof line === 'function' ? line(r) : line }); return r },
     select: async pattern => Object.keys(files).filter(p => p.startsWith(pattern.slice(0, -1))).map(p => [p, {}]),
     put: (uri, bytes) => { writes.push(uri); files[uri] = Buffer.from(bytes) },
     runtime: { dir: '/x', uri: 'local/x' },
@@ -114,15 +114,15 @@ test('initialise: its hook file there, the request waits for its lines; resumed,
   const { exec, waited, writes, now } = execution('booted')
   t.is(await act('initialise', exec), null, 'it waits: its lines run by the runtime, through the mrepo\'s own inbox')
   t.alike([waited.length, now(), writes], [1, 'booted', []], 'one job; the state not moved yet, nothing written')
-  t.alike(await act('initialise', { ...exec, resumed: { output: [{ line: 'info/extract', output: {} }] } }), { service: 'initialised', state: 'initialised' }, 'resumed: what was done, the state now')
+  t.alike(await act('initialise', { ...exec, resumed: { status: 'done', message: 'Ran its initialise hook, 1 line:\ninfo/extract', attachments: [] } }), 'The service is initialised: its state is initialised.', 'resumed: what was done, the state now, said')
   t.alike([now(), writes], ['initialised', ['/runtime/service.json']], 'one write: the state')
 })
 
 test('start, stop, shutdown: no hook file of its own, the state moved at once', async (t) => {
   const { exec, waited, now } = execution('initialised')
-  t.alike(await act('start', exec), { service: 'started', state: 'started' })
-  t.alike(await act('stop', exec), { service: 'stopped', state: 'initialised' }, 'stopped: back to initialised')
-  t.alike(await act('shutdown', exec), { service: 'shut down', state: 'booted' }, 'shut down: back to booted')
+  t.is(await act('start', exec), 'The service is started: its state is started.')
+  t.is(await act('stop', exec), 'The service is stopped: its state is initialised.', 'stopped: back to initialised')
+  t.is(await act('shutdown', exec), 'The service is shut down: its state is booted.', 'shut down: back to booted')
   t.alike([now(), waited.length], ['booted', 0])
 })
 
@@ -130,8 +130,8 @@ test('a hook file dropped in by a package that defines the mrepo: each transitio
   const dropped = { 'start/1': ['x/first'], 'start/2': ['protocol/activate', '.', 'boot'], 'shutdown/1': ['x/last'] }
   const { exec, waited, now, writes } = execution('initialised', dropped)
   t.is(await act('start', exec), null, 'start: waits for its own lines')
-  t.alike(await act('stop', { ...exec }), { service: 'stopped', state: 'initialised', again: true }, 'stop: no file of its own, at once; on an initialised service a repeat, the state as it is')
-  await t.exception(act('shutdown', { ...exec, resumed: { error: 'line 1: x/last: refused' } }), /hook shutdown: line 1: x\/last: refused/, 'a line that failed: the transition fails, saying which')
+  t.is(await act('stop', { ...exec }), 'The service was initialised already: nothing moved.', 'stop: no file of its own, at once; on an initialised service a repeat, the state as it is')
+  await t.exception(act('shutdown', { ...exec, resumed: { status: 'failed', message: 'line 1: x/last: refused', attachments: [] } }), /hook shutdown: line 1: x\/last: refused/, 'a line that failed: the transition fails, saying which')
   t.alike([now(), waited.length], ['initialised', 1], 'the state not moved by the failure')
   t.ok(writes.every(w => w === '/runtime/service.json'))
 })

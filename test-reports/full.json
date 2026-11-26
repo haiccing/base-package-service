@@ -1,8 +1,8 @@
 {
   "package": "haiccing/base-package-service",
-  "content": "8db600a260fe1bbc25a8293116210dc99e4e3eb83a88ad63515c7ea75631641a",
+  "content": "08f0487682fa3dc7619bace7ac22665005cd74d5d2aab4a618c271c201c7f814",
   "bare": "v1.36.0",
-  "date": "2026-11-25T09:01:06.693Z",
+  "date": "2026-11-26T23:16:06.458Z",
   "set": "full",
   "ok": true,
   "units": [
@@ -79,8 +79,8 @@
         "total": 11
       },
       "asserts": {
-        "passed": 92,
-        "total": 92
+        "passed": 94,
+        "total": 94
       },
       "failures": []
     },
@@ -88,12 +88,12 @@
       "unit": "/test/modules/pear-full-square/mrepo-base-request",
       "ok": true,
       "tests": {
-        "passed": 22,
-        "total": 22
+        "passed": 30,
+        "total": 30
       },
       "asserts": {
-        "passed": 263,
-        "total": 263
+        "passed": 305,
+        "total": 305
       },
       "failures": []
     },
@@ -105,8 +105,8 @@
         "total": 3
       },
       "asserts": {
-        "passed": 19,
-        "total": 19
+        "passed": 21,
+        "total": 21
       },
       "failures": []
     },
@@ -118,8 +118,8 @@
         "total": 9
       },
       "asserts": {
-        "passed": 97,
-        "total": 97
+        "passed": 98,
+        "total": 98
       },
       "failures": []
     },
@@ -218,12 +218,12 @@
       "unit": "/test/modules/pear-full-square/pkgm-base-check",
       "ok": true,
       "tests": {
-        "passed": 26,
-        "total": 26
+        "passed": 27,
+        "total": 27
       },
       "asserts": {
-        "passed": 90,
-        "total": 90
+        "passed": 94,
+        "total": 94
       },
       "failures": []
     }
