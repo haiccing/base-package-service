@@ -1,8 +1,8 @@
 {
   "package": "haiccing/base-package-service",
-  "content": "08f0487682fa3dc7619bace7ac22665005cd74d5d2aab4a618c271c201c7f814",
+  "content": "0ae1c5f1d0bda6a8df3c44709eb5225ddb9867d606af7cf8619ce3f33be235a4",
   "bare": "v1.36.0",
-  "date": "2026-11-26T23:16:06.458Z",
+  "date": "2026-11-27T12:19:55.168Z",
   "set": "full",
   "ok": true,
   "units": [
@@ -79,8 +79,8 @@
         "total": 11
       },
       "asserts": {
-        "passed": 94,
-        "total": 94
+        "passed": 93,
+        "total": 93
       },
       "failures": []
     },
@@ -88,12 +88,12 @@
       "unit": "/test/modules/pear-full-square/mrepo-base-request",
       "ok": true,
       "tests": {
-        "passed": 30,
-        "total": 30
+        "passed": 31,
+        "total": 31
       },
       "asserts": {
-        "passed": 305,
-        "total": 305
+        "passed": 324,
+        "total": 324
       },
       "failures": []
     },
@@ -124,6 +124,19 @@
       "failures": []
     },
     {
+      "unit": "/test/modules/pear-full-square/mycelium-avro",
+      "ok": true,
+      "tests": {
+        "passed": 9,
+        "total": 9
+      },
+      "asserts": {
+        "passed": 73,
+        "total": 73
+      },
+      "failures": []
+    },
+    {
       "unit": "/test/modules/pear-full-square/mycelium-container-document",
       "ok": true,
       "tests": {
@@ -144,8 +157,8 @@
         "total": 144
       },
       "asserts": {
-        "passed": 777,
-        "total": 777
+        "passed": 784,
+        "total": 784
       },
       "failures": []
     },
@@ -159,6 +172,19 @@
       "asserts": {
         "passed": 217,
         "total": 217
+      },
+      "failures": []
+    },
+    {
+      "unit": "/test/modules/pear-full-square/mycelium-value",
+      "ok": true,
+      "tests": {
+        "passed": 3,
+        "total": 3
+      },
+      "asserts": {
+        "passed": 16,
+        "total": 16
       },
       "failures": []
     },
@@ -218,12 +244,12 @@
       "unit": "/test/modules/pear-full-square/pkgm-base-check",
       "ok": true,
       "tests": {
-        "passed": 27,
-        "total": 27
+        "passed": 28,
+        "total": 28
       },
       "asserts": {
-        "passed": 94,
-        "total": 94
+        "passed": 98,
+        "total": 98
       },
       "failures": []
     }
