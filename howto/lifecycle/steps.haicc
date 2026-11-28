@@ -2,14 +2,14 @@
 . boot/deploy host haiccing/base-component-haicc
 # expect: "deployed":"host"
 # step: what is behind the door allowed
-host boot/deploy node-1 haiccing/base-package-runtime
-# expect: "deployed":"node-1"
-host boot/teardown node-1
-# expect: "tornDown":"node-1"
+host boot/deploy peer-1 haiccing/base-package-runtime
+# expect: "deployed":"peer-1"
+host boot/teardown peer-1
+# expect: "tornDown":"peer-1"
 # step: its door closed again: boot refused (not now) until the next start; its runtime runs on
 host service/stop
 # expect: "state":"initialised"
-host boot/deploy node-1 haiccing/base-package-runtime
+host boot/deploy peer-1 haiccing/base-package-runtime
 # expect: error: not now
 # step: back to booted
 host service/shutdown
