@@ -5,7 +5,7 @@ The service protocol's part of an mrepo's structure: the service state, booted, 
 - **`runtime/service.json`**: `{ "state": "booted" }`. Every mrepo has
   it (the boot mrepo, the root, the one exception).
 - **No commission**: deployed alone, this package is a plain mrepo for a
-  platform to lay a component on (Splectral's `install`); the platform
+  platform to lay a component on (SPLectral's `install`); the platform
   brings it into service after.
 - **Its hooks** (`runtime/hooks/`): at `boot`, `service`, `help`,
   `info` and `runtime` activated; at `initialise`, its info extracted.
